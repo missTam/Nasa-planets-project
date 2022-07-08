@@ -32,7 +32,7 @@ app.use("/planets", planetsRouter)
 app.use("/launches", launchesRouter)
 
 // serve react app from the root of the url instead of specifying full path with 'index.html'
-app.get("/", (req, res) => {
+app.get("/*", (req, res) => {
     res.sendFile(path.join(__dirname, "..", "public", "index.html"));
 })
 
