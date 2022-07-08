@@ -1,4 +1,4 @@
-const { getAllLaunches, addNewLaunch } = require("../../models/launches.model");
+const { getAllLaunches, addNewLaunch, exists, abortLaunchById } = require("../../models/launches.model");
 
 function getLaunches(req, res) {
     return res.status(200).json(getAllLaunches()); // returns an array from an iterable
@@ -29,7 +29,22 @@ function addLaunch(req, res) {
     return res.status(201).json(launch);
 }
 
+function abortLaunch(req, res) {
+    const launchId = Number(req.params.id);
+
+    // if launch doesn't exist
+    if(!exists(launchId)) {
+        return res.status(404).json({
+            error: "Launch not found"
+        });
+    }
+
+    return res.status(200).json(abortLaunchById(launchId));
+
+}
+
 module.exports = {
     getLaunches,
     addLaunch,
+    abortLaunch,
 }
