@@ -1,2 +1,5 @@
 # dependencies
 /node_modules
+
+# gets recreated on each frontend build
+/public/static/js/

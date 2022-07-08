@@ -45,6 +45,10 @@ function loadPlanetsData() {
   });
 }
 
+function getAllPlanets() {
+  return habitablePlanets;
+}
+
 /* 
   Streams are async code; node returns module exports before the async code has finished executing - it happens upon the module being required elsewhere
   Steps of execution:
@@ -57,5 +61,5 @@ function loadPlanetsData() {
   */
 module.exports = {
   loadPlanetsData, 
-  planets: habitablePlanets,
+  getAllPlanets,
 };

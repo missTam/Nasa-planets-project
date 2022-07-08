@@ -2,7 +2,9 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const morgan = require("morgan");
+
 const planetsRouter = require("./routes/planets/planets.router")
+const launchesRouter = require("./routes/launches/launches.router")
 
 // In the app.js we define all our server middleware
 
@@ -27,6 +29,7 @@ app.use(express.static(path.join(__dirname, "..", "public")))
 
 // add planets route to express app
 app.use("/planets", planetsRouter)
+app.use("/launches", launchesRouter)
 
 // serve react app from the root of the url instead of specifying full path with 'index.html'
 app.get("/", (req, res) => {
