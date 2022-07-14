@@ -15,7 +15,7 @@ describe("Launches API", () => { // we group describe blocks to add a setup step
   describe("Test GET /launches", () => {
     test("It should respond with 200 success", async () => {
       const response = await request(app)
-        .get("/launches")
+        .get("/v1/launches")
         .expect("Content-Type", /json/)
         .expect(200); // making a request on a passed in app server
     });
@@ -44,7 +44,7 @@ describe("Launches API", () => { // we group describe blocks to add a setup step
 
     test("It should respond with 201 success", async () => {
       const response = await request(app)
-        .post("/launches")
+        .post("/v1/launches")
         .send(launchData)
         .expect("Content-Type", /json/)
         .expect(201);
@@ -59,7 +59,7 @@ describe("Launches API", () => { // we group describe blocks to add a setup step
 
     test("It should catch missing required properties", async () => {
       const response = await request(app)
-        .post("/launches")
+        .post("/v1/launches")
         .send(launchDataWithoutDate)
         .expect("Content-Type", /json/)
         .expect(400);
@@ -72,7 +72,7 @@ describe("Launches API", () => { // we group describe blocks to add a setup step
 
     test("It should catch invalid date values", async () => {
       const response = await request(app)
-        .post("/launches")
+        .post("/v1/launches")
         .send(launchDataWithInvalidDate)
         .expect("Content-Type", /json/)
         .expect(400);

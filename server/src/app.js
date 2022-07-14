@@ -3,8 +3,7 @@ const cors = require("cors");
 const path = require("path");
 const morgan = require("morgan");
 
-const planetsRouter = require("./routes/planets/planets.router")
-const launchesRouter = require("./routes/launches/launches.router")
+const api = require("./routes/api");
 
 // In the app.js we define all our server middleware
 
@@ -20,16 +19,15 @@ app.use(cors({
 app.use(morgan("combined"));
 
 // built-in json parsing middleware which parses incoming requests with JSON data as JS object
-app.use(express.json())
+app.use(express.json());
 
 /* use express to serve all public files which are generated when react app is built
 Both react (http://localhost:8000/index.html) and node app are now served under the same port: 8000
 */
-app.use(express.static(path.join(__dirname, "..", "public")))
+app.use(express.static(path.join(__dirname, "..", "public")));
 
-// add planets route to express app
-app.use("/planets", planetsRouter)
-app.use("/launches", launchesRouter)
+// all our routes are under v1
+app.use("/v1", api);
 
 // serve react app from the root of the url instead of specifying full path with 'index.html'
 app.get("/*", (req, res) => {
