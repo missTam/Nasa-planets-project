@@ -3,3 +3,6 @@
 
 # gets recreated on each frontend build
 /public/static/js/
+
+# misc
+.env

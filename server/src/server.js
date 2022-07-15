@@ -1,7 +1,11 @@
+require("dotenv").config();
 const http = require("http");
 const app = require("./app");
-const { loadPlanetsData } = require("./models/planets.model");
+
 const { mongoConnect } = require("./services/mongo");
+
+const { loadPlanetsData } = require("./models/planets.model");
+const { loadLaunchesData } = require("./models/launches.model");
 
 // check if port is specified in package.json as env var, if not default to 8000
 const PORT = process.env.PORT || 8000;
@@ -16,6 +20,7 @@ async function startServer() {
   try {
     await mongoConnect();
     await loadPlanetsData();
+    await loadLaunchesData();
   } catch(err) {
     console.log(err)
   }
