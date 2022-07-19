@@ -2,13 +2,19 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const morgan = require("morgan");
+const helmet = require("helmet");
 
 const api = require("./routes/api");
 
-// In the app.js we define all our server middleware
+/* 
+* In the app.js we define all our server middleware
+*/
 
 // express app is essentially middlware added on top of node's built-in http server
 const app = express();
+
+// security related middleware
+app.use(helmet());
 
 // configure cors middleware to loosen the same origin policy and only accept requests from trusted clients
 app.use(cors({
